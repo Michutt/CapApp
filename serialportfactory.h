@@ -21,8 +21,8 @@ private slots:
     void handleReadyRead();
 
 private:
-    QSerialPort *m_serialPort = nullptr;
-    QByteArray m_readData;
+    QSerialPort *port = nullptr;
+    QByteArray rcvData;
 };
 
 #endif // SERIALPORT_H
