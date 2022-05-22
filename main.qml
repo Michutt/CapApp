@@ -14,7 +14,7 @@ Window {
             onClicked: {
                 backend.portName = name.text
                 backend.portBaud = baud.text
-                backend.isConnected = true
+                backend.connect = true
             }
         }
         TextField {
@@ -28,7 +28,7 @@ Window {
             placeholderText: "Port Baud"
         }
         Text {
-            text: "CONNECTED"
+            text: backend.isConnected ? "CONNECTED" : "DISCONNECTED"
         }
     }
 }

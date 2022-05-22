@@ -15,16 +15,22 @@ void Backend::setPortBaud(const int &baud)
     portBaud = baud;
 }
 
-void Backend::setConnect(const bool &connected)
+bool Backend::isConnected()
 {
-    if (!isConnected)
+    return m_isConnected;
+}
+
+void Backend::setConnect(const bool &unused)
+{
+    if (!m_isConnected)
     {
         serialPort.setPortName(portName);
         serialPort.setBaudRate(portBaud);
 
         if(serialPort.open(QIODevice::ReadWrite))
         {
-            isConnected = true;
+            m_isConnected = true;
+            emit connected();
         }
         serialFactory = new SerialPortFactory(&serialPort);
     }
