@@ -5,10 +5,12 @@ project(CapApp VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+find_package(Qt6 6.2 COMPONENTS Quick Core SerialPort REQUIRED)
+
 
 qt_add_executable(appCapApp
     main.cpp
+    serialportfactory.cpp      serialportfactory.h
     resources/icon.rc
 )
 
@@ -27,6 +29,11 @@ set_target_properties(appCapApp PROPERTIES
 )
 
 target_compile_definitions(appCapApp
-    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+)
+
 target_link_libraries(appCapApp
-    PRIVATE Qt6::Quick)
+    PRIVATE Qt6::Quick
+            Qt::Core
+            Qt::SerialPort
+)
