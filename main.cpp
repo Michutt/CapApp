@@ -1,5 +1,6 @@
-#include "serialportfactory.h"
+#include "backend.h"
 
+#include <QQmlContext>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
@@ -7,7 +8,12 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    Backend backend;
+
     QQmlApplicationEngine engine;
+    QQmlContext* ctx = engine.rootContext();
+    ctx->setContextProperty("backend", &backend);
+
     const QUrl url(u"qrc:/CapApp/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -15,17 +21,6 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
-    QSerialPort serialPort;
-    const QString serialPortName = "COM7";
-    const int serialPortBaudRate = QSerialPort::Baud115200;
-
-    serialPort.setPortName(serialPortName);
-    serialPort.setBaudRate(serialPortBaudRate);
-
-    serialPort.open(QIODevice::ReadOnly);
-
-    SerialPortFactory SerialPortFactory(&serialPort);
 
     return app.exec();
 }

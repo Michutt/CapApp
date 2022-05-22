@@ -13,7 +13,8 @@ SerialPortFactory::SerialPortFactory(QSerialPort *serialPort, QObject *parent) :
 void SerialPortFactory::handleReadyRead()
 {
     rcvData.clear();
-
     rcvData.append(port->readAll());
-
 }
+
+
+

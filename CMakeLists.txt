@@ -11,6 +11,7 @@ find_package(Qt6 6.2 COMPONENTS Quick Core SerialPort REQUIRED)
 qt_add_executable(appCapApp
     main.cpp
     serialportfactory.cpp      serialportfactory.h
+    backend.cpp                backend.h
     resources/icon.rc
 )
 

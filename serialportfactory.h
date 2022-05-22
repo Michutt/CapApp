@@ -15,7 +15,7 @@ class SerialPortFactory : public QObject
     Q_OBJECT
 
 public:
-    explicit SerialPortFactory(QSerialPort *serialPort, QObject *parent = nullptr);
+    SerialPortFactory(QSerialPort *serialPort, QObject *parent = nullptr);
 
 private slots:
     void handleReadyRead();
